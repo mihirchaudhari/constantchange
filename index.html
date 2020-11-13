@@ -1,0 +1,432 @@
+<!doctype html>
+<html>
+<head>
+  <title>Chem Project</title>
+  <script
+			  src="https://code.jquery.com/jquery-3.5.1.min.js"
+			  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+			  crossorigin="anonymous"></script>
+  <script
+        src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+  <style>
+    /* General Styling */
+    body {
+      font-family: sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    body div {
+      position: fixed;
+    }
+
+    /* Reaction / Atom / Key Styling */
+    .rxn {
+      display: flex;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .rxn h1:not(:last-child) {
+      margin-right: 16px;
+    }
+
+    .atom-key {
+      border-radius: 50%;
+      border: 2px solid #fff;
+      position: relative;
+    }
+
+    #key {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      padding: 8px;
+    }
+
+    #key h1 {
+      font-size: 16px;
+      min-width: 128px;
+    }
+
+    .key-item {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .atom {
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    .carbon {
+      background-color:#000;
+      width:24px;
+      height:24px;
+    }
+
+    .oxygen {
+      background-color:#ff4d4d;
+      width:18px;
+      height:18px;
+    }
+
+    .hydrogen {
+      background-color:#fff;
+      width:6px;
+      height:6px;
+    }
+
+    .cellulose {
+      background-color:#33a5ff;
+      width:48px;
+      height:48px;
+    }
+
+    /* Video Styling */
+    #video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      z-index: -1;
+    }
+
+    #overlay {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #000c;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="video-container">
+    <video autoplay>
+      <source src="chem_project_video.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div id="overlay"></div>
+  <div id="combustion" class="rxn" style="top:-100vh;width:100vw;opacity:0">
+    <h1>C<sub>6</sub>H<sub>10</sub>O<sub>5</sub>(s)</h1>
+    <h1>+</h1>
+    <h1>6O<sub>2(g)</h1>
+    <h1><!--&#x2192--></h1>
+    <h1>6CO<sub>2(g)</sub></h1>
+    <h1>+</h1>
+    <h1>5H<sub>2</sub>O(l)</h1>
+  </div>
+  <div id="photosynthesis" class="rxn" style="top:-100vh;width:100vw;opacity:0">
+    <h1>6CO<sub>2</sub></h1>
+    <h1>+</h1>
+    <h1>6H<sub>2</sub>O</h1>
+    <h1><!--&#x2192--></h1>
+    <h1>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>(s)</h1>
+    <h1>+</h1>
+    <h1>6O<sub>2</sub></h1>
+  </div>
+  <!-- Key -->
+  <div id="key">
+    <div class="key-item">
+      <h1>Carbon</h1>
+      <div id="carbon" class="atom-key"
+        style="background-color:#000;width:24px;height:24px;">
+      </div>
+    </div>
+    <div class="key-item">
+      <h1>Oxygen</h1>
+      <div id="oxygen" class="atom-key"
+        style="background-color:#ff4d4d;width:18px;height:18px;">
+      </div>
+    </div>
+    <div class="key-item">
+      <h1>Hydrogen</h1>
+      <div id="hydrogen" class="atom-key"
+        style="background-color:#fff;width:6px;height:6px;">
+      </div>
+    </div>
+    <div class="key-item">
+      <h1>Cellulose</h1>
+      <div id="cellulose" class="atom-key"
+        style="background-color:#33a5ff;width:48px;height:48px;">
+      </div>
+    </div>
+  </div>
+  <!-- Cellulose (atoms that make it up) and oxygen -->
+  <div class="atom carbon" style="top:-100vh;left:0vh"></div>
+  <div class="atom carbon" style="top:-100vh;left:10vh"></div>
+  <div class="atom carbon" style="top:-100vh;left:20vh"></div>
+  <div class="atom carbon" style="top:-100vh;left:30vh"></div>
+  <div class="atom carbon" style="top:-100vh;left:40vh"></div>
+  <div class="atom carbon" style="top:-100vh;left:50vh"></div>
+
+  <div class="atom hydrogen" style="top:-100vh;left:60vh"></div>
+  <div class="atom hydrogen" style="top:-100vh;left:70vh"></div>
+  <div class="atom hydrogen" style="top:-100vh;left:80vh"></div>
+  <div class="atom hydrogen" style="top:-100vh;left:90vh"></div>
+  <div class="atom hydrogen" style="top:-100vh;left:100vh"></div>
+  <div class="atom hydrogen" style="top:-100vh;left:0vh"></div>
+  <div class="atom hydrogen" style="top:-100vh;left:10vh"></div>
+  <div class="atom hydrogen" style="top:-100vh;left:20vh"></div>
+  <div class="atom hydrogen" style="top:-100vh;left:30vh"></div>
+  <div class="atom hydrogen" style="top:-100vh;left:40vh"></div>
+  <div class="atom hydrogen" style="top:-100vh;left:30vh"></div>
+  <div class="atom hydrogen" style="top:-100vh;left:40vh"></div>
+
+  <div class="atom oxygen" style="top:-100vh;left:50vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:60vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:70vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:80vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:90vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:100vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:0vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:10vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:20vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:30vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:40vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:50vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:60vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:70vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:80vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:90vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:100vh"></div>
+  <div class="atom oxygen" style="top:-100vh;left:100vh"></div>
+
+  <script type="text/javascript">
+    // Animate text
+    $('#combustion').
+      delay(2000).animate({top: '128px', opacity: '1'}, 2000).
+      delay(19000).animate({right: '-100vw'}, 2000);
+
+    $('#photosynthesis').
+      delay(44000).animate({top: '128px', opacity: '1'}, 2000).
+      delay(19000).animate({right: '-100vw'}, 2000);
+
+    // Animate the carbons (3-match, tree)
+    $($('.carbon')[0]).
+      delay(2000).animate({top: '384px', left: '256px'}, 2000).
+      delay(10000).animate({top: '250px', left: '800px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '250px', left: '800px'}, 2000);
+
+    $($('.carbon')[1]).
+      delay(2000).animate({top: '384px', left: '512px'}, 2000).
+      delay(10000).animate({top: '300px', left: '800px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '300px', left: '800px'}, 2000);
+
+    $($('.carbon')[2]).
+      delay(2000).animate({top: '288px', left: '320px'}, 2000).
+      delay(10000).animate({top: '350px', left: '800px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '350px', left: '800px'}, 2000);
+
+    $($('.carbon')[3]).
+      delay(2000).animate({top: '288px', left: '448px'}, 2000).
+      delay(10000).animate({top: '400px', left: '800px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '400px', left: '800px'}, 2000);
+
+    $($('.carbon')[4]).
+      delay(2000).animate({top: '480px', left: '320px'}, 2000).
+      delay(10000).animate({top: '450px', left: '800px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '450px', left: '800px'}, 2000);
+
+    $($('.carbon')[5]).
+      delay(2000).animate({top: '520px', left: '320px'}, 2000).
+      delay(10000).animate({top: '500px', left: '800px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '500px', left: '800px'}, 2000);
+
+    // Animate the hydrogens
+    $($('.hydrogen')[0]).
+      delay(2000).animate({top: '370px', left: '520px'}, 2000).
+      delay(10000).animate({top: '260px', left: '418px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '260px', left: '418px'}, 2000);
+
+    $($('.hydrogen')[1]).
+      delay(2000).animate({top: '370px', left: '520px'}, 2000).
+      delay(10000).animate({top: '320px', left: '418px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '320px', left: '418px'}, 2000);
+
+    $($('.hydrogen')[2]).
+      delay(2000).animate({top: '246px', left: '455px'}, 2000).
+      delay(10000).animate({top: '380px', left: '418px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '380px', left: '418px'}, 2000);
+
+    $($('.hydrogen')[3]).
+      delay(2000).animate({top: '529px', left: '352px'}, 2000).
+      delay(10000).animate({top: '440px', left: '418px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '440px', left: '418px'}, 2000);
+
+    $($('.hydrogen')[4]).
+      delay(2000).animate({top: '529px', left: '307px'}, 2000).
+      delay(10000).animate({top: '500px', left: '418px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '500px', left: '418px'}, 2000);
+
+    $($('.hydrogen')[5]).
+      delay(2000).animate({top: '348px', left: '328px'}, 2000).
+      delay(10000).animate({top: '260px', left: '393px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '260px', left: '393px'}, 2000);
+
+    $($('.hydrogen')[6]).
+      delay(2000).animate({top: '580px', left: '328px'}, 2000).
+      delay(10000).animate({top: '320px', left: '393px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '320px', left: '393px'}, 2000);
+
+    $($('.hydrogen')[7]).
+      delay(2000).animate({top: '393px', left: '240px'}, 2000).
+      delay(10000).animate({top: '380px', left: '393px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '380px', left: '393px'}, 2000);
+
+    $($('.hydrogen')[8]).
+      delay(2000).animate({top: '272px', left: '328px'}, 2000).
+      delay(10000).animate({top: '440px', left: '393px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '440px', left: '393px'}, 2000);
+
+    $($('.hydrogen')[9]).
+      delay(2000).animate({top: '464px', left: '329px'}, 2000).
+      delay(10000).animate({top: '500px', left: '393px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '500px', left: '393px'}, 2000);
+
+      //delay(45000).animate({top: '200px', left: '400px'}, 2000);
+
+    // Oxygen
+    $($('.oxygen')[0]).
+      delay(2000).animate({top: '480px', left: '448px'}, 2000).
+      delay(10000).animate({top: '252px', left: '780px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '250px', left: '780px'}, 2000);
+
+    $($('.oxygen')[1]).
+      delay(2000).animate({top: '320px', left: '323px'}, 2000).
+      delay(10000).animate({top: '302px', left: '780px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '250px', left: '826px'}, 2000);
+
+    $($('.oxygen')[2]).
+      delay(2000).animate({top: '260px', left: '450px'}, 2000).
+      delay(10000).animate({top: '352px', left: '780px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '300px', left: '780px'}, 2000);
+
+    $($('.oxygen')[3]).
+      delay(2000).animate({top: '387px', left: '545px'}, 2000).
+      delay(10000).animate({top: '402px', left: '780px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '300px', left: '826px'}, 2000);
+
+    $($('.oxygen')[4]).
+      delay(2000).animate({top: '554px', left: '322px'}, 2000).
+      delay(10000).animate({top: '452px', left: '780px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '350px', left: '780px'}, 2000);
+
+    $($('.oxygen')[5]).
+      delay(2000).animate({top: '540px', left: '916px'}, 2000).
+      delay(10000).animate({top: '502px', left: '780px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '350px', left: '826px'}, 2000);
+
+    $($('.oxygen')[6]).
+      delay(2000).animate({top: '540px', left: '896px'}, 2000).
+      delay(10000).animate({top: '252px', left: '826px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '400px', left: '780px'}, 2000);
+
+    $($('.oxygen')[7]).
+      delay(2000).animate({top: '508px', left: '916px'}, 2000).
+      delay(10000).animate({top: '302px', left: '826px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '400px', left: '826px'}, 2000);
+
+    $($('.oxygen')[8]).
+      delay(2000).animate({top: '508px', left: '896px'}, 2000).
+      delay(10000).animate({top: '352px', left: '826px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '450px', left: '780px'}, 2000);
+
+    $($('.oxygen')[9]).
+      delay(2000).animate({top: '476px', left: '916px'}, 2000).
+      delay(10000).animate({top: '402px', left: '826px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '450px', left: '826px'}, 2000);
+
+    $($('.oxygen')[10]).
+      delay(2000).animate({top: '476px', left: '896px'}, 2000).
+      delay(10000).animate({top: '452px', left: '826px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '500px', left: '780px'}, 2000);
+
+    $($('.oxygen')[11]).
+      delay(2000).animate({top: '444px', left: '916px'}, 2000).
+      delay(10000).animate({top: '502px', left: '826px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '500px', left: '826px'}, 2000);
+
+    $($('.oxygen')[12]).
+      delay(2000).animate({top: '444px', left: '896px'}, 2000).
+      delay(10000).animate({top: '500px', left: '400px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '500px', left: '400px'}, 2000);
+
+    $($('.oxygen')[13]).
+      delay(2000).animate({top: '412px', left: '916px'}, 2000).
+      delay(10000).animate({top: '440px', left: '400px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '440px', left: '400px'}, 2000);
+
+    $($('.oxygen')[14]).
+      delay(2000).animate({top: '412px', left: '896px'}, 2000).
+      delay(10000).animate({top: '380px', left: '400px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '380px', left: '400px'}, 2000);
+
+    $($('.oxygen')[15]).
+      delay(2000).animate({top: '384px', left: '916px'}, 2000).
+      delay(10000).animate({top: '320px', left: '400px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(20000).animate({top: '320px', left: '400px'}, 2000);
+
+    $($('.oxygen')[16]).
+      delay(2000).animate({top: '384px', left: '896px'}, 2000).
+      delay(10000).animate({top: '260px', left: '400px'}, 2000).
+      delay(7000).animate({top: '-100vh', left: '0'}, 2000, function(){
+        // Paper folding
+        for (var i = 0; i < 40; ++i)
+        {
+          $('body').append('<div class="atom cellulose" style="top:-100vh;left:' + (i * 48) + 'px;"></div>');
+          $($('.cellulose')[i]).animate({top: '256px'}, 2000).
+            delay(10000).animate({top: (256 + Math.abs(i - 16) * 8) + 'px'}, 2000).
+            delay(3000).animate({top: '-100vh'}, 2000);
+        }
+      }).
+      delay(20000).animate({top: '260px', left: '400px'}, 2000);
+
+    $($('.oxygen')[17]).
+      delay(45000).animate({top: '200px', left: '400px'}, 2000);
+
+  </script>
+</body>
+</html>
