@@ -111,9 +111,9 @@
 
     /* Animations */
     @keyframes slideBig {
-      0% {transform: translateX(0);}
+      /*0% {transform: translateX(0);}
       50% {transform: translateX(128px);}
-      100% {transform: translateX(0);}
+      100% {transform: translateX(0);}*/
     }
   </style>
 </head>
@@ -128,19 +128,19 @@
     <h1>C<sub>6</sub>H<sub>10</sub>O<sub>5</sub>(s)</h1>
     <h1>+</h1>
     <h1>6O<sub>2(g)</h1>
-    <h1><!--&#x2192--></h1>
+    <h1>&#x2192</h1>
     <h1>6CO<sub>2(g)</sub></h1>
     <h1>+</h1>
-    <h1>5H<sub>2</sub>O(l)</h1>
+    <h1>5H<sub>2</sub>O(g)</h1>
   </div>
   <div id="photosynthesis" class="rxn" style="top:-100vh;width:100vw;opacity:0">
-    <h1>6CO<sub>2</sub></h1>
+    <h1>6CO<sub>2</sub>(g)</h1>
     <h1>+</h1>
-    <h1>6H<sub>2</sub>O</h1>
-    <h1><!--&#x2192--></h1>
+    <h1>6H<sub>2</sub>O(l)</h1>
+    <h1>&#x2192</h1>
     <h1>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>(s)</h1>
     <h1>+</h1>
-    <h1>6O<sub>2</sub></h1>
+    <h1>6O<sub>2</sub>(g)</h1>
   </div>
   <!-- Key -->
   <div id="key">
@@ -222,43 +222,55 @@
     // Animate the carbons (3-match, tree)
     $($('.carbon')[0]).
       delay(2000).animate({top: '384px', left: '256px'}, 2000).
-      delay(10000).animate({top: '250px', left: '800px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(10000).animate({top: '250px', left: '800px'}, 2000, function(){
+        $($('.carbon')[0]).css({animation: 'slideBig 1s ease 0s infinite'});
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '250px', left: '800px'}, 2000).
       delay(5000).animate({top: '384px', left: '256px'}, 2000);
 
     $($('.carbon')[1]).
       delay(2000).animate({top: '384px', left: '512px'}, 2000).
-      delay(10000).animate({top: '300px', left: '800px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(10000).animate({top: '300px', left: '800px'}, 2000, function(){
+        $($('.carbon')[1]).css({animation: 'slideBig 1s ease 0.2s infinite'});
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '300px', left: '800px'}, 2000).
       delay(5000).animate({top: '384px', left: '512px'}, 2000);
 
     $($('.carbon')[2]).
       delay(2000).animate({top: '288px', left: '320px'}, 2000).
-      delay(10000).animate({top: '350px', left: '800px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(10000).animate({top: '350px', left: '800px'}, 2000, function(){
+        $($('.carbon')[2]).css({animation: 'slideBig 1s ease 0.4s infinite'});
+      }).
+      delay(7000).animate({ animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '350px', left: '800px'}, 2000).
       delay(5000).animate({top: '288px', left: '320px'}, 2000);
 
     $($('.carbon')[3]).
       delay(2000).animate({top: '288px', left: '448px'}, 2000).
-      delay(10000).animate({top: '400px', left: '800px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(10000).animate({top: '400px', left: '800px'}, 2000, function(){
+        $($('.carbon')[3]).css({animation: 'slideBig 1s ease 0.6s infinite'});
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '400px', left: '800px'}, 2000).
       delay(5000).animate({top: '288px', left: '448px'}, 2000);
 
     $($('.carbon')[4]).
       delay(2000).animate({top: '480px', left: '320px'}, 2000).
-      delay(10000).animate({top: '450px', left: '800px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(10000).animate({top: '450px', left: '800px'}, 2000, function(){
+        $($('.carbon')[4]).css({animation: 'slideBig 1s ease 0.8s infinite'});
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '450px', left: '800px'}, 2000).
       delay(5000).animate({top: '480px', left: '320px'}, 2000);
 
     $($('.carbon')[5]).
       delay(2000).animate({top: '520px', left: '320px'}, 2000).
-      delay(10000).animate({top: '500px', left: '800px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(10000).animate({top: '500px', left: '800px'}, 2000, function(){
+        $($('.carbon')[5]).css({animation: 'slideBig 1s ease 0s infinite'});
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '500px', left: '800px'}, 2000).
       delay(5000).animate({top: '520px', left: '320px'}, 2000);
 
@@ -344,8 +356,10 @@
     // Oxygen
     $($('.oxygen')[0]).
       delay(2000).animate({top: '480px', left: '448px'}, 2000).
-      delay(10000).animate({top: '252px', left: '780px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(10000).animate({top: '252px', left: '780px'}, 2000, function(){
+        $($('.oxygen')[0]).css({animation: 'slideBig 1s ease 0s infinite'});
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '250px', left: '780px'}, 2000).
       delay(5000).animate({top: '250px', left: '847px'}, 2000, function(){
           $($('.oxygen')[0]).css({animation: 'slideBig 1s ease 1s infinite'});
@@ -354,8 +368,10 @@
 
     $($('.oxygen')[1]).
       delay(2000).animate({top: '320px', left: '323px'}, 2000).
-      delay(10000).animate({top: '302px', left: '780px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(10000).animate({top: '302px', left: '780px'}, 2000, function(){
+        $($('.oxygen')[1]).css({animation: 'slideBig 1s ease 0.2s infinite'});
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '250px', left: '826px'}, 2000).
       delay(5000).animate({top: '250px', left: '826px'}, 2000, function(){
         $($('.oxygen')[1]).css({animation: 'slideBig 1s ease 1s infinite'});
@@ -363,8 +379,10 @@
 
     $($('.oxygen')[2]).
       delay(2000).animate({top: '260px', left: '450px'}, 2000).
-      delay(10000).animate({top: '352px', left: '780px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(10000).animate({top: '352px', left: '780px'}, 2000, function(){
+        $($('.oxygen')[2]).css({animation: 'slideBig 1s ease 0.4s infinite'})
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '300px', left: '780px'}, 2000).
       delay(5000).animate({top: '300px', left: '847px'}, 2000, function(){
         $($('.oxygen')[2]).css({animation: 'slideBig 1s ease 0.8s infinite'});
@@ -372,8 +390,10 @@
 
     $($('.oxygen')[3]).
       delay(2000).animate({top: '387px', left: '545px'}, 2000).
-      delay(10000).animate({top: '402px', left: '780px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(10000).animate({top: '402px', left: '780px'}, 2000, function(){
+        $($('.oxygen')[3]).css({animation: 'slideBig 1s ease 0.6s infinite'});
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '300px', left: '826px'}, 2000).
       delay(5000).animate({top: '300px', left: '826px'}, 2000, function(){
         $($('.oxygen')[3]).css({animation: 'slideBig 1s ease 0.8s infinite'});
@@ -381,7 +401,9 @@
 
     $($('.oxygen')[4]).
       delay(2000).animate({top: '554px', left: '322px'}, 2000).
-      delay(10000).animate({top: '452px', left: '780px'}, 2000).
+      delay(10000).animate({top: '452px', left: '780px'}, 2000, function(){
+        $($('.oxygen')[4]).css({animation: 'slideBig 1s ease 0.8s infinite'});
+      }).
       delay(7000).animate({top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '350px', left: '780px'}, 2000).
       delay(5000).animate({top: '350px', left: '847px'}, 2000, function(){
@@ -389,53 +411,75 @@
       });
 
     $($('.oxygen')[5]).
-      delay(2000).animate({top: '540px', left: '916px'}, 2000).
-      delay(10000).animate({top: '502px', left: '780px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(2000).animate({top: '540px', left: '916px'}, 2000, function(){
+        $($('.oxygen')[5]).css({animation: 'slideBig 1s ease 1.2s infinite'})
+      }).
+      delay(10000).animate({animation: 'none', top: '502px', left: '780px'}, 2000, function(){
+        $($('.oxygen')[5]).css({animation: 'slideBig 1s ease 0s infinite'});
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '350px', left: '826px'}, 2000).
       delay(5000).animate({top: '350px', left: '826px'}, 2000, function(){
         $($('.oxygen')[5]).css({animation: 'slideBig 1s ease 0.6s infinite'});
       });
 
     $($('.oxygen')[6]).
-      delay(2000).animate({top: '540px', left: '896px'}, 2000).
-      delay(10000).animate({top: '252px', left: '826px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(2000).animate({top: '540px', left: '896px'}, 2000, function(){
+        $($('.oxygen')[6]).css({animation: 'slideBig 1s ease 1.2s infinite'})
+      }).
+      delay(10000).animate({animation: 'none', top: '252px', left: '826px'}, 2000, function(){
+        $($('.oxygen')[6]).css({animation: 'slideBig 1s ease 0.2s infinite'});
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '400px', left: '780px'}, 2000).
       delay(5000).animate({top: '400px', left: '847px'}, 2000, function(){
         $($('.oxygen')[6]).css({animation: 'slideBig 1s ease 0.4s infinite'});
       });
 
     $($('.oxygen')[7]).
-      delay(2000).animate({top: '508px', left: '916px'}, 2000).
-      delay(10000).animate({top: '302px', left: '826px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(2000).animate({top: '508px', left: '916px'}, 2000, function(){
+        $($('.oxygen')[7]).css({animation: 'slideBig 1s ease 0s infinite'})
+      }).
+      delay(10000).animate({animation: 'none', top: '302px', left: '826px'}, 2000, function(){
+        $($('.oxygen')[7]).css({animation: 'slideBig 1s ease 0.4s infinite'})
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '400px', left: '826px'}, 2000).
       delay(5000).animate({top: '400px', left: '826px'}, 2000, function(){
         $($('.oxygen')[7]).css({animation: 'slideBig 1s ease 0.4s infinite'});
       });
 
     $($('.oxygen')[8]).
-      delay(2000).animate({top: '508px', left: '896px'}, 2000).
-      delay(10000).animate({top: '352px', left: '826px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(2000).animate({top: '508px', left: '896px'}, 2000, function(){
+        $($('.oxygen')[8]).css({animation: 'slideBig 1s ease 0s infinite'})
+      }).
+      delay(10000).animate({animation: 'none', top: '352px', left: '826px'}, 2000, function(){
+        $($('.oxygen')[8]).css({animation: 'slideBig 1s ease 0.6s infinite'});
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '450px', left: '780px'}, 2000).
       delay(5000).animate({top: '450px', left: '847px'}, 2000, function(){
         $($('.oxygen')[8]).css({animation: 'slideBig 1s ease 0.2s infinite'});
       });
 
     $($('.oxygen')[9]).
-      delay(2000).animate({top: '476px', left: '916px'}, 2000).
-      delay(10000).animate({top: '402px', left: '826px'}, 2000).
-      delay(7000).animate({top: '-100vh', left: '0'}, 2000).
+      delay(2000).animate({top: '476px', left: '916px'}, 2000, function(){
+        $($('.oxygen')[9]).css({animation: 'slideBig 1s ease 0.2s infinite'})
+      }).
+      delay(10000).animate({animation: 'none', top: '402px', left: '826px'}, 2000, function(){
+        $($('.oxygen')[9]).css({animation: 'slideBig 1s ease 0.8s infinite'});
+      }).
+      delay(7000).animate({animation: 'none', top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '450px', left: '826px'}, 2000).
       delay(5000).animate({top: '450px', left: '826px'}, 2000, function(){
         $($('.oxygen')[9]).css({animation: 'slideBig 1s ease 0.2s infinite'});
       });
 
     $($('.oxygen')[10]).
-      delay(2000).animate({top: '476px', left: '896px'}, 2000).
-      delay(10000).animate({top: '452px', left: '826px'}, 2000).
+      delay(2000).animate({top: '476px', left: '896px'}, 2000, function(){
+        $($('.oxygen')[10]).css({animation: 'slideBig 1s ease 0.2s infinite'})
+      }).
+      delay(10000).animate({animation: 'none', top: '452px', left: '826px'}, 2000).
       delay(7000).animate({top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '500px', left: '780px'}, 2000).
       delay(5000).animate({top: '500px', left: '847px'}, 2000, function(){
@@ -443,8 +487,10 @@
       });
 
     $($('.oxygen')[11]).
-      delay(2000).animate({top: '444px', left: '916px'}, 2000).
-      delay(10000).animate({top: '502px', left: '826px'}, 2000).
+      delay(2000).animate({top: '444px', left: '916px'}, 2000, function(){
+        $($('.oxygen')[11]).css({animation: 'slideBig 1s ease 0.4s infinite'})
+      }).
+      delay(10000).animate({animation: 'none', top: '502px', left: '826px'}, 2000).
       delay(7000).animate({top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '500px', left: '826px'}, 2000).
       delay(5000).animate({top: '500px', left: '826px'}, 2000, function(){
@@ -452,36 +498,46 @@
       });
 
     $($('.oxygen')[12]).
-      delay(2000).animate({top: '444px', left: '896px'}, 2000).
-      delay(10000).animate({top: '500px', left: '400px'}, 2000).
+      delay(2000).animate({top: '444px', left: '896px'}, 2000, function(){
+        $($('.oxygen')[12]).css({animation: 'slideBig 1s ease 0.4s infinite'})
+      }).
+      delay(10000).animate({animation: 'none', top: '500px', left: '400px'}, 2000).
       delay(7000).animate({top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '500px', left: '400px'}, 2000).
       delay(5000).animate({top: '358px', left: '259px'}, 2000);
 
     $($('.oxygen')[13]).
-      delay(2000).animate({top: '412px', left: '916px'}, 2000).
-      delay(10000).animate({top: '440px', left: '400px'}, 2000).
+      delay(2000).animate({top: '412px', left: '916px'}, 2000, function(){
+        $($('.oxygen')[13]).css({animation: 'slideBig 1s ease 0.6s infinite'})
+      }).
+      delay(10000).animate({animation: 'none', top: '440px', left: '400px'}, 2000).
       delay(7000).animate({top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '440px', left: '400px'}, 2000).
       delay(5000).animate({top: '554px', left: '322px'}, 2000);
 
     $($('.oxygen')[14]).
-      delay(2000).animate({top: '412px', left: '896px'}, 2000).
-      delay(10000).animate({top: '380px', left: '400px'}, 2000).
+      delay(2000).animate({top: '412px', left: '896px'}, 2000, function(){
+        $($('.oxygen')[14]).css({animation: 'slideBig 1s ease 0.6s infinite'})
+      }).
+      delay(10000).animate({animation: 'none', top: '380px', left: '400px'}, 2000).
       delay(7000).animate({top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '380px', left: '400px'}, 2000).
       delay(5000).animate({top: '417px', left: '515px'}, 2000);
 
     $($('.oxygen')[15]).
-      delay(2000).animate({top: '384px', left: '916px'}, 2000).
-      delay(10000).animate({top: '320px', left: '400px'}, 2000).
+      delay(2000).animate({top: '384px', left: '916px'}, 2000, function(){
+        $($('.oxygen')[15]).css({animation: 'slideBig 1s ease 0.8s infinite'})
+      }).
+      delay(10000).animate({animation: 'none', top: '320px', left: '400px'}, 2000).
       delay(7000).animate({top: '-100vh', left: '0'}, 2000).
       delay(20000).animate({top: '320px', left: '400px'}, 2000).
       delay(5000).animate({top: '262px', left: '450px'}, 2000);
 
     $($('.oxygen')[16]).
-      delay(2000).animate({top: '384px', left: '896px'}, 2000).
-      delay(10000).animate({top: '260px', left: '400px'}, 2000).
+      delay(2000).animate({top: '384px', left: '896px'}, 2000, function(){
+        $($('.oxygen')[16]).css({animation: 'slideBig 1s ease 0.8s infinite'})
+      }).
+      delay(10000).animate({animation: 'none', top: '260px', left: '400px'}, 2000).
       delay(7000).animate({top: '-100vh', left: '0'}, 2000, function(){
         // Paper folding
         for (var i = 0; i < 40; ++i)
